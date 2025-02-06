@@ -3,7 +3,9 @@ package com.example.bank;
 public class Main {
 
 	public static void main(String[] args) {
-		System.out.println("GHello");
+		CommandParser commandParser = new CommandParser();		
+		commandParser.start();
+				
 	}
 
 }
