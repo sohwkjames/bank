@@ -21,20 +21,24 @@ public class Transaction {
 		private String type; // D, W, I
 		private float amount;
 		
-		public void setTransactionId(String transactionId) {
+		public TransactionBuilder setTransactionId(String transactionId) {
 			this.transactionId = transactionId;
+			return this;
 		}
 		
-		public void setDate(LocalDate date) {
+		public TransactionBuilder setDate(LocalDate date) {
 			this.date = date;
+			return this;
 		}
 		
-		public void setType(String type) {
+		public TransactionBuilder setType(String type) {
 			this.type = type;
+			return this;
 		}
 		
-		public void setAmount(float amount) {
+		public TransactionBuilder setAmount(float amount) {
 			this.amount = amount;
+			return this;
 		}	
 		
 		public Transaction build() {

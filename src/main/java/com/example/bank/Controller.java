@@ -26,13 +26,16 @@ public class Controller {
             if (command.equals("t")) {
             	System.out.println("Please enter transaction details in <Date> <Account> <Type> <Amount> format \n"
             			+ "(or enter blank to go back to main menu):\n");
-            	
-                String transactionString = scanner.nextLine().trim().toLowerCase();
-                String accountId = commandParser.getAccountId(transactionString);
-                Transaction transaction = commandParser.getTransction(transactionString);
-                Account account = bankService.addTransactionToAccount(accountId, transaction);
-                String commandParser.printTransactions(account.getTransactions());
-            			
+            	try {
+            		String transactionString = scanner.nextLine().trim().toLowerCase();
+                    String accountId = commandParser.getAccountId(transactionString);
+                    Transaction transaction = commandParser.getTransction(transactionString);
+//                    Account account = bankService.addTransactionToAccount(accountId, transaction);
+//                    String commandParser.printTransactions(account.getTransactions());
+            	} catch (Exception e) {
+            		System.out.println(e.getMessage());
+            	}
+                		
             } else if (command.equals("q")) {
             	System.out.println("Thank you for banking with AwesomeGIC Bank. \nHave a nice day!");
             }
