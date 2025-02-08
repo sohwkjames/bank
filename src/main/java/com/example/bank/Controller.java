@@ -1,5 +1,6 @@
 package com.example.bank;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.example.bank.model.Account;
@@ -17,8 +18,14 @@ public class Controller {
 
 	public void start() {
         Scanner scanner = new Scanner(System.in);
+        boolean isFirstMessage = true;
+        String welcomeMessage;
         while (true) {
-    		String welcomeMessage = "Welcome to AwesomeGIC Bank! What would you like to do?\n[T] Input transactions\n[I] Define interest rules\n[P] Print statement\n[Q] Quit ";
+        	if (isFirstMessage) {
+        		welcomeMessage = "Welcome to AwesomeGIC Bank! What would you like to do?\n[T] Input transactions\n[I] Define interest rules\n[P] Print statement\n[Q] Quit ";
+        	} else {
+        		welcomeMessage = "Is there anything else you'd like to do?\\n[T] Input transactions\\n[I] Define interest rules\\n[P] Print statement\\n[Q] Quit ";
+        	}
     		System.out.println(welcomeMessage);
     		
             String command = scanner.nextLine().trim().toLowerCase();
@@ -28,19 +35,23 @@ public class Controller {
             			+ "(or enter blank to go back to main menu):\n");
             	try {
             		String transactionString = scanner.nextLine().trim().toLowerCase();
+            		
                     String accountId = commandParser.getAccountId(transactionString);
                     Transaction transaction = commandParser.getTransction(transactionString);
-//                    Account account = bankService.addTransactionToAccount(accountId, transaction);
-//                    String commandParser.printTransactions(account.getTransactions());
+                    Account account = bankService.addTransactionToAccount(accountId, transaction);
+                    
+                    System.out.println(account.generateStatement());
+                    isFirstMessage = false;
             	} catch (Exception e) {
             		System.out.println(e.getMessage());
             	}
-                		
+
             } else if (command.equals("q")) {
             	System.out.println("Thank you for banking with AwesomeGIC Bank. \nHave a nice day!");
+            	return;
             }
-            
-            
         }
 	}
+
+
 }
