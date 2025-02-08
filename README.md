@@ -15,3 +15,7 @@
 3. To compile and run the app, run `mvn compile exec:java -Dexec.mainClass="com.example.bank.Main"`
 
 4. To run all tests, run `mvn test`.
+
+### Design and architecture
+
+https://drive.google.com/file/d/1N2nyAzKL0l3MG1IR0FAwcEdS5WwuUsNQ/view?usp=sharing
