@@ -32,4 +32,4 @@ Known bugs to fix
 
 ### Design and architecture
 
-https://drive.google.com/file/d/1N2nyAzKL0l3MG1IR0FAwcEdS5WwuUsNQ/view?usp=sharing
+https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=bank%20app%20architecture#Uhttps%3A%2F%2Fdrive.google.com%2Fuc%3Fid%3D1N2nyAzKL0l3MG1IR0FAwcEdS5WwuUsNQ%26export%3Ddownload
