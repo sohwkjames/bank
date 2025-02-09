@@ -34,7 +34,7 @@ public class Controller {
             	System.out.println("Please enter transaction details in <Date> <Account> <Type> <Amount> format \n"
             			+ "(or enter blank to go back to main menu):\n");
             	try {
-            		String transactionString = scanner.nextLine().trim().toLowerCase();
+            		String transactionString = scanner.nextLine().trim();
             		
                     String accountId = commandParser.getAccountId(transactionString);
                     Transaction transaction = commandParser.getTransction(transactionString);

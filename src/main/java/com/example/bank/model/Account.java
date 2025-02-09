@@ -3,15 +3,19 @@ package com.example.bank.model;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
+import com.example.bank.exceptions.InsufficientBalanceException;
 
 public class Account {
 	private String accountId;
 	private List<Transaction> transactions;
-	private float balance;
+	private double balance;
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMdd");
 
-	public Account(String accountId, List<Transaction> transactions, float balance) {
+	public Account(String accountId, List<Transaction> transactions, double balance) {
 		super();
 		this.accountId = accountId;
 		this.transactions = transactions;
@@ -37,10 +41,10 @@ public class Account {
 	public void setTransactions(List<Transaction> transactions) {
 		this.transactions = transactions;
 	}
-	public float getBalance() {
+	public double getBalance() {
 		return balance;
 	}
-	public void setBalance(float balance) {
+	public void setBalance(double balance) {
 		this.balance = balance;
 	}
 	
@@ -50,25 +54,65 @@ public class Account {
 		
 		if (transaction.getType().equals("D")) {
 			this.balance += transaction.getAmount();
+			transactions.add(transaction);
+	        Collections.sort(transactions, Comparator.comparing(Transaction::getDate));
 		}
 		
 		if (transaction.getType().equals("W")) {
-			if (transactions.size() == 0) {
-				throw new Exception("First transaction should not be a withdrawal");
-			}
-			
-			if (this.balance - transaction.getAmount() < 0) {
-				throw new Exception("Cannot withdraw more than available balance");
-			}
-			
-			this.balance -= transaction.getAmount();
+			transactions.add(transaction);
+	        Collections.sort(transactions, Comparator.comparing(Transaction::getDate));
+	        double runningBalance = 0;
+	        
+	        // Checks that running balance is not negative at any point
+	        for (Transaction txn : transactions) {
+	        	if (txn.getType().equals("D")) {
+	        		runningBalance += txn.getAmount();
+	        	}
+	        	
+	        	if (txn.getType().equals("W")) {
+	        		runningBalance -= txn.getAmount();
+	        	}
+	        	
+	        	if (runningBalance < 0) {
+	        		transactions.remove(transaction);
+	        		throw new InsufficientBalanceException();
+	        	}
+	        }
+	        
+	        balance -= transaction.getAmount();
 		}
 		
-		transactions.add(transaction);
 		
 		return this;
 
 	}
+	
+//	public Account addTransaction(Transaction transaction) throws Exception {
+//		String id = generateTransactionId(transaction.getDate());
+//		transaction.setTransactionId(id);
+//		
+//		
+//		if (transaction.getType().equals("D")) {
+//			this.balance += transaction.getAmount();
+//		}
+//		
+//		if (transaction.getType().equals("W")) {
+//			if (transactions.size() == 0) {
+//				throw new Exception("First transaction should not be a withdrawal");
+//			}
+//			
+//			if (this.balance - transaction.getAmount() < 0) {
+//				throw new Exception("Cannot withdraw more than available balance");
+//			}
+//			
+//			this.balance -= transaction.getAmount();
+//		}
+//		
+//		transactions.add(transaction);
+//		
+//		return this;
+//
+//	}
 	
 //	public List<Transaction> getTransactionsByDate(LocalDate date) {
 //        List<Transaction> result = new ArrayList<>();
@@ -94,7 +138,8 @@ public class Account {
     }
 
 	public String generateStatement() {
-		String result = "Account: " + this.getAccountId();
+		String result = "Account: " + this.getAccountId() +"\n";
+		result += "| Date | Txn Id | Type | Amount |\n";
 		for (Transaction t : transactions) {
 			result += t.toString() + "\n";
 		}
@@ -102,11 +147,15 @@ public class Account {
 		return result;
 	}
 
+	public String generateFullStatement() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 	@Override
 	public String toString() {
-		return "Account [accountId=" + accountId + ", transactions=" + transactions + ", balance=" + balance + "]";
+		return "Account [accountId=" + accountId + ", transactions=" + transactions + ", balance=" + balance + "t]";
 	}
-
 	
 	
 //	@Override

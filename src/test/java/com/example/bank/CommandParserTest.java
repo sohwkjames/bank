@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import com.example.bank.exceptions.InvalidTransactionFormatException;
+
 public class CommandParserTest {
     @Test
     void testGetAccountId() throws Exception {
@@ -16,13 +18,13 @@ public class CommandParserTest {
     }
     
     @Test
-    void testInvalidTransactionString() throws Exception {
+    void testInvalidTransactionString() {
     	CommandParser parser = new CommandParser();
     	String incoming = "20230626 W 100.00";
-        Exception exception = assertThrows(Exception.class, () -> {
+        assertThrows(InvalidTransactionFormatException.class, () -> {
             parser.getAccountId(incoming);
         });
         
-        assertEquals(exception.getMessage(), "Invalid transaction detail format");    	
+//        assertEquals(exception.getMessage(), "Invalid transaction detail format");    	
     }
 }

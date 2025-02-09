@@ -1,12 +1,13 @@
 package com.example.bank.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Transaction {
 	private String transactionId;
 	private LocalDate date;
 	private String type; // D, W, I
-	private float amount;
+	private double amount;
 
 	private Transaction(TransactionBuilder builder) {
 		this.transactionId = builder.transactionId;
@@ -33,24 +34,26 @@ public class Transaction {
 	public void setType(String type) {
 		this.type = type;
 	}
-	public float getAmount() {
+	public double getAmount() {
 		return amount;
 	}
-	public void setAmount(float amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 
 	@Override
 	public String toString() {
-		return "|" + date + " | " + transactionId + " | " + type + "| "
-				+ amount + "|";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        String formattedAmount = String.format("%.2f", amount);
+		return "| " + date.format(formatter) + " | " + transactionId + " | " + type + " | "
+				+ formattedAmount + " |";
 	}
 	
 	public static class TransactionBuilder {
 		private String transactionId;
 		private LocalDate date;
 		private String type; // D, W, I
-		private float amount;
+		private double amount;
 		
 		public TransactionBuilder setTransactionId(String transactionId) {
 			this.transactionId = transactionId;
@@ -67,7 +70,7 @@ public class Transaction {
 			return this;
 		}
 		
-		public TransactionBuilder setAmount(float amount) {
+		public TransactionBuilder setAmount(double amount) {
 			this.amount = amount;
 			return this;
 		}	

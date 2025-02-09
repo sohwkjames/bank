@@ -3,6 +3,7 @@ package com.example.bank;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import com.example.bank.exceptions.InvalidTransactionFormatException;
 import com.example.bank.model.Transaction;
 
 public class CommandParser {
@@ -32,10 +33,10 @@ public class CommandParser {
 		return transaction;
 	}
 	
-	private void validateTransactionString(String s) throws Exception {
+	private void validateTransactionString(String s) throws InvalidTransactionFormatException {
 		String[] parts = s.split(" ");
 		if (parts.length != 4) {
-			throw new Exception("Invalid transaction detail format");
+			throw new InvalidTransactionFormatException();
 		}
 	}
 	
