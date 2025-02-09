@@ -3,10 +3,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.bank.model.Account;
+import com.example.bank.model.InterestRule;
 import com.example.bank.model.Transaction;
 
 public class BankService {
 	private List<Account> accounts = new ArrayList<>();
+//	private List<InterestRule> interestRule;
 //	private InterestRuleService interestService;
 	
 	public BankService(List<Account> accounts) {

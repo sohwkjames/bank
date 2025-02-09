@@ -156,6 +156,12 @@ public class Account {
 	public String toString() {
 		return "Account [accountId=" + accountId + ", transactions=" + transactions + ", balance=" + balance + "t]";
 	}
+
+	public void generateMonthlyStatement(List<InterestRule> yearMthRules) {
+		// Get interest amount		
+		// 
+		
+	}
 	
 	
 //	@Override
