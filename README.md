@@ -22,6 +22,8 @@ Features that are yet to be implemented
 
 - Computing interest
 
+- Prettify the printing of interest rules and transcations when adding new transaction/rule
+
 - Generating account statement with interest and rolling balance for year month
 
 Known bugs to fix

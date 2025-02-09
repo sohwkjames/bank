@@ -29,7 +29,7 @@ public class Controller {
 			if (isFirstMessage) {
 				welcomeMessage = "Welcome to AwesomeGIC Bank! What would you like to do?\n[T] Input transactions\n[I] Define interest rules\n[P] Print statement\n[Q] Quit ";
 			} else {
-				welcomeMessage = "Is there anything else you'd like to do?\\n[T] Input transactions\\n[I] Define interest rules\\n[P] Print statement\\n[Q] Quit ";
+				welcomeMessage = "Is there anything else you'd like to do?\n[T] Input transactions\n[I] Define interest rules\n[P] Print statement\n[Q] Quit ";
 			}
 			System.out.println(welcomeMessage);
 
