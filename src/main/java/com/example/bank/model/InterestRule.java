@@ -9,12 +9,12 @@ public class InterestRule {
 	private double rate;
     private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMdd");
 	
-	public InterestRule(LocalDate date, String ruleId, double rate) {
-		super();
-		this.date = date;
-		this.ruleId = ruleId;
-		this.rate = rate;
-	}
+		public InterestRule(LocalDate date, String ruleId, double rate) {
+			super();
+			this.date = date;
+			this.ruleId = ruleId;
+			this.rate = rate;
+		}
 	
 	public LocalDate getDate() {
 		return date;

@@ -16,6 +16,18 @@
 
 4. To run all tests, run `mvn test`.
 
+### Progress
+
+Features that are yet to be implemented
+
+- Computing interest
+
+- Generating account statement with interest and rolling balance for year month
+
+Known bugs to fix
+
+- Need validation on transactionType
+
 ### Design and architecture
 
 https://drive.google.com/file/d/1N2nyAzKL0l3MG1IR0FAwcEdS5WwuUsNQ/view?usp=sharing

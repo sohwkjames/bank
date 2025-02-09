@@ -73,10 +73,10 @@ public class Controller {
 				String accountId = commandParser.getAccountIdFromPrintStatementString(printStatementString);
 				Account acc = bankService.getAccountById(accountId);
 				List<InterestRule> yearMthRules = interestRuleService.getRulesFromYearMonth(date);
-				// Get list of interestRules for the month
-				// pass list of interest 
 				
-				acc.generateMonthlyStatement(yearMthRules);
+				acc.generateStatementForYearMonth(date);
+//				Work in progress
+//				acc.generateMonthlyStatement(yearMthRules);
 			}
 
 			else if (command.equals("q")) {

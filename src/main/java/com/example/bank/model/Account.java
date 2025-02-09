@@ -87,44 +87,6 @@ public class Account {
 
 	}
 	
-//	public Account addTransaction(Transaction transaction) throws Exception {
-//		String id = generateTransactionId(transaction.getDate());
-//		transaction.setTransactionId(id);
-//		
-//		
-//		if (transaction.getType().equals("D")) {
-//			this.balance += transaction.getAmount();
-//		}
-//		
-//		if (transaction.getType().equals("W")) {
-//			if (transactions.size() == 0) {
-//				throw new Exception("First transaction should not be a withdrawal");
-//			}
-//			
-//			if (this.balance - transaction.getAmount() < 0) {
-//				throw new Exception("Cannot withdraw more than available balance");
-//			}
-//			
-//			this.balance -= transaction.getAmount();
-//		}
-//		
-//		transactions.add(transaction);
-//		
-//		return this;
-//
-//	}
-	
-//	public List<Transaction> getTransactionsByDate(LocalDate date) {
-//        List<Transaction> result = new ArrayList<>();
-//        for (Transaction transaction : transactions) {
-//            if (transaction.getDate().equals(date)) {
-//                result.add(transaction);
-//            }
-//        }
-//        return result;
-//	}
-//	
-
     private String generateTransactionId(LocalDate date) {
         int n = getNextTransactionNumberForDate(date);
         return date.format(DATE_FORMAT) + "-" + String.format("%02d", n);
@@ -162,19 +124,9 @@ public class Account {
 		// 
 		
 	}
-	
-	
-//	@Override
-//	public String toString() {
-//		String result = "";
-//		result += "Account: " + accountId + "\n";
-//		result += "| Date | TxnId | Type | Amount |" + "\n";
-//		for (Transaction t : transactions) {
-//			result += t.toString() + "\n";
-//		}
-//		
-//		return result;
-//	}
-	
+
+	public void generateStatementForYearMonth(LocalDate date) {
+		
+	}	
 	
 }
