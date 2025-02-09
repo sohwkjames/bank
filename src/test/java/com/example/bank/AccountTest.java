@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import com.example.bank.exceptions.InsufficientBalanceException;
 import com.example.bank.model.Account;
 import com.example.bank.model.Transaction;
-import com.example.bank.service.BankService;
 
 public class AccountTest {
 	private Account account;
@@ -26,7 +25,7 @@ public class AccountTest {
     @Test
     void testNewAccountShouldHaveNoTransactions() {
     	Account account = new Account("AC2");
-    	assertEquals(account.getTransactions().size(), 0); 
+    	assertEquals(account.getTransactions().size(), 0);
     	assertEquals(account.getBalance(), 0); 
     }	
     

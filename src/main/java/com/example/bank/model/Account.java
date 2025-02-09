@@ -55,12 +55,12 @@ public class Account {
 		if (transaction.getType().equals("D")) {
 			this.balance += transaction.getAmount();
 			transactions.add(transaction);
-	        Collections.sort(transactions, Comparator.comparing(Transaction::getDate));
+	        Collections.sort(transactions, Comparator.comparing(Transaction::getTransactionId));
 		}
 		
 		if (transaction.getType().equals("W")) {
 			transactions.add(transaction);
-	        Collections.sort(transactions, Comparator.comparing(Transaction::getDate));
+	        Collections.sort(transactions, Comparator.comparing(Transaction::getTransactionId));
 	        double runningBalance = 0;
 	        
 	        // Checks that running balance is not negative at any point
