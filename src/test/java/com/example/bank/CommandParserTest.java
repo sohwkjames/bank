@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
+import com.example.bank.exceptions.InvalidRateException;
 import com.example.bank.exceptions.InvalidTransactionFormatException;
 import com.example.bank.model.Transaction;
 
@@ -27,7 +28,6 @@ public class CommandParserTest {
         assertThrows(InvalidTransactionFormatException.class, () -> {
             parser.getAccountId(incoming);
         });
-        
     }
     
     @Test
@@ -40,6 +40,36 @@ public class CommandParserTest {
     			.setDate(LocalDate.of(2023, 06, 26))
     			.setType("D")
     			.build();
-    	assertEquals(expected, actual);
+    	assertEquals(expected.getAmount(), actual.getAmount());
+    	assertEquals(expected.getDate(), actual.getDate());
+    	assertEquals(expected.getType(), actual.getType());
+    	assertEquals(expected.getTransactionId(), actual.getTransactionId());
     };
+    
+    @Test
+    void testGetDateFromString() {
+    	CommandParser parser = new CommandParser();
+    	String incoming = "20240102";
+    	LocalDate expected = LocalDate.of(2024, 01, 02);
+    	LocalDate actual = parser.getDateFromString(incoming);
+    	assertEquals(expected, actual);
+    }
+    
+    @Test
+    void testGetInterestRateStringInvalidFormat() {
+    	CommandParser parser = new CommandParser();
+    	String incoming = "20230615 ABC 123 2.20";
+    	assertThrows(InvalidTransactionFormatException.class, () -> {
+            parser.getInterestRule(incoming);
+        });
+    }
+    
+    @Test
+    void testGetInterestRateStringInvalidInterest() {
+    	CommandParser parser = new CommandParser();
+    	String incoming = "20230615 RULE03 100";
+    	assertThrows(InvalidRateException.class, () -> {
+            parser.getInterestRule(incoming);
+        });
+    }
 }

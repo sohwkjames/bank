@@ -46,7 +46,8 @@ public class CommandParser {
 		return LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyyMMdd"));
 	}
 
-	public InterestRule getInterestRule(String interestRuleString) throws InvalidRateException {
+	public InterestRule getInterestRule(String interestRuleString) throws InvalidRateException, InvalidTransactionFormatException {
+		validateInterestRuleString(interestRuleString);
 		String[] parts = interestRuleString.split(" ");
 		LocalDate date = getDateFromString(parts[0]);
 		String ruleId = parts[1];
@@ -59,6 +60,14 @@ public class CommandParser {
 		InterestRule rule = new InterestRule(date, ruleId, rate);
 		
 		return rule;
+	}
+
+	private void validateInterestRuleString(String interestRuleString) throws InvalidTransactionFormatException {
+		String[] parts = interestRuleString.split(" ");
+		if (parts.length != 3) {
+			throw new InvalidTransactionFormatException("Invalid interest rule format");
+		}
+		
 	}
 
 	public LocalDate getDateFromPrintStatementString(String printStatementString) {
